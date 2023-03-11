@@ -9,7 +9,7 @@ export default function TextForm(props) {
     // console.log("uppercase clicked");
     let nText = text.toUpperCase();
     setText(nText);
-    {props.handleAlert("Converted to Uppercase", "success")}
+    props.handleAlert("Converted to Uppercase", "success")
   };
   const handleLoClick = () => {
     let nText = text.toLowerCase();
@@ -31,6 +31,11 @@ export default function TextForm(props) {
     let text = '';
     setText(text);
     props.handleAlert("Cleared", "success");
+  };
+  const wordCount = () => {
+    if(text.length===0) return 0;
+    let nText =text.split(/[ ]+/).join(" ");
+    return nText.split(" ").length;
   };
   const [text, setText] = useState("");
   return (
@@ -58,8 +63,8 @@ export default function TextForm(props) {
         </button>
       </div>
       <div className="container my-2" style={{color: props.mode==='light'?'black':'white'}}>
-        <p>{text.split(" ").length===1 && text.length===0 ? 0 : text.split(" ").length} Words and {text.length} Characters</p>
-        <p>{text.split(" ").length * 0.2} seconds needed to read this</p>
+        <p>{wordCount()} Words and {text.length} Characters</p>
+        <p>{text.length===0 ? 0 : text.split(" ").length * 0.2} seconds needed to read this</p>
       </div>
     </>
   );
