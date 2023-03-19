@@ -40,7 +40,7 @@ function App() {
         <div className="container my-3">
           <Routes>
             <Route exact path="/" element={<TextForm title="Enter text below" mode={mode} handleAlert={handleAlert} />} />
-            <Route exact path="/about" element={<About />} />
+            <Route exact path="/about" element={<About mode={mode}/>} />
           </Routes>
         </div>
       </BrowserRouter>

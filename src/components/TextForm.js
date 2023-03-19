@@ -32,11 +32,6 @@ export default function TextForm(props) {
     setText(text);
     props.handleAlert("Cleared", "success");
   };
-  const wordCount = () => {
-    if(text.length===0) return 0;
-    let nText =text.split(/[ ]+/).join(" ");
-    return nText.split(" ").length;
-  };
   const [text, setText] = useState("");
   return (
     <>
@@ -44,27 +39,27 @@ export default function TextForm(props) {
         <h1>{props.title}</h1>
         <div className="mb-3">
           <textarea
-            className="form-control" id="myBox" rows="8" value={text} onChange={handelOnChange} style={{backgroundColor: props.mode==='light'?'grey':'white', color: props.mode==='light'?'white':'black'}}></textarea>
+            className="form-control" id="myBox" rows="8" value={text} onChange={handelOnChange} style={{backgroundColor: props.mode==='light'?'white':'grey', color: props.mode==='light'?'black':'white'}}></textarea>
         </div>
         <button className="btn btn-primary" onClick={handleUpClick}>
           Convert to uppercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleLoClick}>
+        <button className="btn btn-primary mx-2 my-1" onClick={handleLoClick}>
           Convert to lowercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+        <button className="btn btn-primary mx-2 my-1" onClick={handleExtraSpaces}>
           Remove Extra Spaces
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleCopyToClip}>
+        <button className="btn btn-primary mx-2 my-1" onClick={handleCopyToClip}>
           Copy to clipboard
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleClear}>
+        <button className="btn btn-primary mx-2 my-1" onClick={handleClear}>
           Clear
         </button>
       </div>
       <div className="container my-2" style={{color: props.mode==='light'?'black':'white'}}>
-        <p>{wordCount()} Words and {text.length} Characters</p>
-        <p>{text.length===0 ? 0 : text.split(" ").length * 0.2} seconds needed to read this</p>
+        <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} Words and {text.length} Characters</p>
+        <p>{text.length===0 ? 0 : text.split(/\s+/).filter((element)=>{return element.length!==0}).length * 0.2} seconds needed to read this</p>
       </div>
     </>
   );
